@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+body {
+  background: rgb(20, 20, 20);
+}
+
+/* Create a sticky/fixed header */
+#header {
+  background-color: rgb(30, 30, 30);
+  position: fixed;
+  top: -50px;
+  left: 0px;
+  width: 100%;
+  display: block;
+  transition: top 0.3s;
+  height: 50px;
+  z-index: 20;
+}
+
+/* Style the header links */
+#header a {
+  font-family: "Source Code Pro", monospace;
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#headerLogo {
+  width: 30px;
+  height: 30px;
+}
+
+/* Links on mouse-over */
+#header a:hover {
+  opacity: 0.5;
+}
+
+/* Style the active/current link */
+#header a:hover {
+  opacity: 0.3;
+}
+
+/* Display some links to the right */
+#header-right {
+  float: right;
+}
+
+#thumbBackGreen {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 120vh;
+  background: center center;
+  background-size: cover;
+  background-image: url(/greenbackground.jpg);
+  opacity: 0.15;
+  z-index: 1;
+  /*-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));*/
+}
+
+#thumbBackGreen:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -moz-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -o-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -ms-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+}
+
+#thumbBackGaming {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 120vh;
+  background: center center;
+  background-size: cover;
+  background-image: url(/gaming.png);
+  opacity: 0.15;
+  z-index: 1;
+  /*-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));*/
+}
+
+#thumbBackGaming:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -moz-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -o-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  background-image: -ms-linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+}
+
+#thumbText {
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-size: 50px;
+  position: relative;
+  top: 35vh;
+  opacity: 1;
+  z-index: 2;
+}
+
+#thumbSubText {
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-size: 30px;
+  position: relative;
+  top: 36vh;
+  opacity: 1;
+  z-index: 2;
+}
+
+.scrollButton a {
+  position: absolute;
+  bottom: 20px;
+  right: 40%;
+  left: 40%;
+  text-align: center;
+  z-index: 2;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.scrollButton a:hover {
+  opacity: 0.5;
+}
+
+#scrollDown {
+  background: url(
+      https://www.nxworld.net/example/css-scroll-down-button/bg05.jpg
+    )centercenter/coverno-repeat;
+}
+
+#scrollDown a {
+  padding-top: 70px;
+}
+
+#scrollDown a span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: downScroll 1.5s infinite;
+  animation: downScroll 1.5s infinite;
+  box-sizing: border-box;
+}
+
+@-webkit-keyframes downScroll {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+
+@keyframes downScroll {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+
+#bodyText {
+  top: 100vh;
+  font-family: "Source Code Pro", monospace;
+  padding: 20px;
+  position: relative;
+  color: rgb(230, 230, 230);
+}
+
+#bodyTextFull {
+  top: 1vh;
+  font-family: "Source Code Pro", monospace;
+  padding: 20px;
+  position: relative;
+  color: rgb(230, 230, 230);
+}
+
+.bodyTitle {
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 400;
+  padding: 30px;
+  position: relative;
+  color: rgb(230, 230, 230);
+  font-size: 40px;
+}
+
+.bodySubtitle {
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 200;
+  padding-bottom: 20px;
+  position: relative;
+  color: rgb(230, 230, 230);
+  font-size: 30px;
+}
+
+.centeredText {
+  text-align: center;
+}
+
+@media screen and (max-width: 580px) {
+  #header {
+    padding: 0px 5px !important;
+    /* Use !important to make sure that JavaScript doesn't override the padding on small screens */
+    height: 50px;
+  }
+
+  #header a {
+    text-align: left;
+  }
+
+  #header-right {
+    float: none;
+    display: none;
+  }
+}
+
+.textGrad {
+  background: -webkit-linear-gradient(#2def77, #00632e);
+  background: linear-gradient(#2def77, #00632e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
