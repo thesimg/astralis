@@ -20,9 +20,10 @@ var p = {
 
     p.gravity += 0.3;
 
-    if (p.accy > 3 && keyIsPressed) {
-      p.accy = 3;
+    if(p.gravity > 20){
+      p.gravity = 20;
     }
+    
     if (p.accx > 2 && keyIsPressed) {
       p.accx = 2;
     }
@@ -30,9 +31,6 @@ var p = {
       p.accx = -2;
     }
 
-    /*if(mouseIsPressed){
-      p.y-=50;
-    }*/
     if (!keyIsPressed && p.accx > 0) {
       p.accx -= 0.1;
     } else if (!keyIsPressed && p.accx < 0) {
