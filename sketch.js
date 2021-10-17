@@ -4,13 +4,22 @@ var blocks = [];
 var scene = "ascent";
 var deathY = 4500;
 
+var canvasWidth = 1440;
+var canvasHeight = 720;
+
+var godmode = false;
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(canvasWidth, canvasHeight);
   generateBlocks(scene);
 }
 
 
 function draw() {
+  if(godmode){
+      scale(0.5);
+      translate(650, 400);
+  }
   switch (scene) {
     case "home":
       background(125, 225, 150);
@@ -48,9 +57,9 @@ function draw() {
       p.draw();
       pop();
       fill(0, -p.y / 100);
-      rect(0, 0, 400, 400);
+      rect(0, 0, width, height);
       break;
-    case "ascentxl":
+    case "lose":
       background(150 + p.y / 600, 200 + p.y / 500, 250 + p.y / 400);
       rectMode(CORNER);
       p.move();
@@ -68,15 +77,18 @@ function draw() {
       p.draw();
       pop();
       fill(0, -p.y / 500);
-      rect(0, 0, 400, 400);
+      rect(0, 0, width, height);
       break;
   }
+  
+  
   fill(0, 0, 0);
   text(Math.round(p.x), 10, 10);
   text(Math.round(p.y), 10, 30);
   text(p.y / 600, 10, 60);
+  text(scene, 10, 80);
   if (p.y > deathY) {
-    p.y = -50;
+    p.y = -1000;
     p.x = -10;
   }
 }
