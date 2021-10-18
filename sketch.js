@@ -1,7 +1,7 @@
 var camX = 0;
 var camY = 0;
 var blocks = [];
-var scene = "ascent";
+var scene = "home";
 var deathY = 4500;
 
 var canvasWidth = 1440;

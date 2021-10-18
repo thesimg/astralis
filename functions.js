@@ -25,19 +25,23 @@ platform.prototype.collide = function() {
     p.x < this.x + this.w &&
     p.y < this.y + this.h
   ) {
-    if (p.previous.x + p.w <= this.x) {
-      p.x = this.x - p.w;
-    }
     p.gravity = 0;
     p.jumpable = true;
+    if (p.previous.x + p.w <= this.x) {
+      p.x = this.x - p.w;
+      p.sticking = "left";
+    }
     if (p.previous.y + p.h <= this.y) {
       p.y = this.y - p.h;
+      p.sticking = "top";
     }
     if (p.previous.x >= this.x + this.w) {
       p.x = this.x + this.w;
+      p.sticking = "right";
     }
     if (p.previous.y >= this.y + this.h) {
       p.y = this.y + this.h;
+      p.sticking = "bottom";
     }
   }
 };
