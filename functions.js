@@ -27,6 +27,7 @@ platform.prototype.collide = function() {
   ) {
     p.gravity = 0;
     p.jumpable = true;
+    //p.dashAllowed = true;
     if (p.previous.x + p.w <= this.x) {
       p.x = this.x - p.w;
       p.sticking = "left";
