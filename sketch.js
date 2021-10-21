@@ -9,16 +9,21 @@ var canvasHeight = 720;
 
 var godmode = false;
 
+var fullscreen = false;
+var fullscreenToggle = false;
+
+var worldSeed = 0;
+
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
+
   generateBlocks(scene);
 }
 
-
 function draw() {
-  if(godmode){
-      scale(0.5);
-      translate(650, 400);
+  if (godmode) {
+    scale(0.5);
+    translate(650, 400);
   }
   switch (scene) {
     case "home":
@@ -80,8 +85,27 @@ function draw() {
       rect(0, 0, width, height);
       break;
   }
-  
-  
+
+  if (keys[70] && fullscreenToggle) {
+    fullscreen = !fullscreen;
+    fullscreenToggle = false;
+    print("fullscreen " + fullscreen);
+    if(fullscreen){
+      resizeCanvas(windowWidth, windowHeight);
+    } else if(!fullscreen) {
+      resizeCanvas(canvasWidth, canvasHeight);
+    }
+  }
+  if (!keys[70]) {
+    fullscreenToggle = true;
+  }
+
+  if (!fullscreen) {
+    if (canvasHeight === windowHeight || canvasWidth === windowWidth) {
+      resizeCanvas(canvasWidth, canvasHeight);
+    }
+  }
+
   fill(0, 0, 0);
   text(Math.round(p.x), 10, 10);
   text(Math.round(p.y), 10, 30);
@@ -91,4 +115,12 @@ function draw() {
     p.y = -1000;
     p.x = -10;
   }
+}
+
+function windowResized() {
+  if (fullscreen) {
+    resizeCanvas(windowWidth, windowHeight);
+    print("windowResized in fullscreen");
+  }
+  print("windowResized outside fullscreen");
 }
