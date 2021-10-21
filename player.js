@@ -15,7 +15,7 @@ var p = {
   dashCooldownMax: 100,
   dashSpeedY: 8,
   dashSpeedX: 12,
-  diagRatio: (3/5),
+  diagRatio: 3 / 5,
 
   jumpable: false,
   x: 100,
@@ -44,7 +44,6 @@ var p = {
       if ((keys[38] && p.jumpable) || (keys[87] && p.jumpable)) {
         p.gravity = -8;
         p.jumpable = false;
-        print("jumping" + random(1));
       }
       if (keys[37] || keys[65]) {
         p.x -= p.speed;
@@ -55,7 +54,15 @@ var p = {
         p.accx += p.accxAdd;
       }
     }
-    
+
+    if (p.gravity > 1 || p.gravity < -1) {
+      if (p.sticking != "bottom" && p.gravity < -7) {
+        p.sticking = false;
+      }
+      if(p.sticking === "bottom" && p.gravity > -7){
+        p.sticking = false;
+      }
+    }
     /*
     up: 38
     down: 40
@@ -84,64 +91,96 @@ var p = {
         p.dashing = "";
       }
     */
-    
-    if(keys[16] && p.dashAllowed){
-      if(keys[87] && !keys[83] && !keys[65] && !keys[68] || keys[38] && !keys[40] && !keys[37] && !keys[39]){ //up
+
+    if (keys[16] && p.dashAllowed) {
+      if (
+        (keys[87] && !keys[83] && !keys[65] && !keys[68]) ||
+        (keys[38] && !keys[40] && !keys[37] && !keys[39])
+      ) {
+        //up
         p.gravity = -p.dashSpeedY;
         p.dashing = "up";
-      } else if(keys[87] && !keys[83] && !keys[65] && keys[68] || keys[38] && !keys[40] && !keys[37] && keys[39]){ //upright
-        p.gravity = -p.dashSpeedY*p.diagRatio;
-        p.x += p.dashSpeedX*p.diagRatio;
+      } else if (
+        (keys[87] && !keys[83] && !keys[65] && keys[68]) ||
+        (keys[38] && !keys[40] && !keys[37] && keys[39])
+      ) {
+        //upright
+        p.gravity = -p.dashSpeedY * p.diagRatio;
+        p.x += p.dashSpeedX * p.diagRatio;
         p.accx += p.accxAdd;
         p.dashing = "upright";
-      } else if(!keys[87] && !keys[83] && !keys[65] && keys[68] || !keys[38] && !keys[40] && !keys[37] && keys[39]){ //right
+      } else if (
+        (!keys[87] && !keys[83] && !keys[65] && keys[68]) ||
+        (!keys[38] && !keys[40] && !keys[37] && keys[39])
+      ) {
+        //right
         p.x += p.dashSpeedX;
         p.accx += p.accxAdd;
         p.gravity = 0;
         p.dashing = "right";
-      }else if(!keys[87] && keys[83] && !keys[65] && keys[68] || !keys[38] && keys[40] && !keys[37] && keys[39]){ //downright
-        p.gravity = p.dashSpeedY*p.diagRatio;
-        p.x += p.dashSpeedX*p.diagRatio;
+      } else if (
+        (!keys[87] && keys[83] && !keys[65] && keys[68]) ||
+        (!keys[38] && keys[40] && !keys[37] && keys[39])
+      ) {
+        //downright
+        p.gravity = p.dashSpeedY * p.diagRatio;
+        p.x += p.dashSpeedX * p.diagRatio;
         p.accx += p.accxAdd;
         p.dashing = "downright";
-      }else if(!keys[87] && keys[83] && !keys[65] && !keys[68] || !keys[38] && keys[40] && !keys[37] && !keys[39]){ //down
+      } else if (
+        (!keys[87] && keys[83] && !keys[65] && !keys[68]) ||
+        (!keys[38] && keys[40] && !keys[37] && !keys[39])
+      ) {
+        //down
         p.gravity = p.dashSpeedY;
         p.dashing = "down";
-      }else if(!keys[87] && keys[83] && keys[65] && !keys[68] || !keys[38] && keys[40] && keys[37] && !keys[39]){ //downleft
-        p.gravity = p.dashSpeedY*p.diagRatio;
-        p.x -= p.dashSpeedX*p.diagRatio;
+      } else if (
+        (!keys[87] && keys[83] && keys[65] && !keys[68]) ||
+        (!keys[38] && keys[40] && keys[37] && !keys[39])
+      ) {
+        //downleft
+        p.gravity = p.dashSpeedY * p.diagRatio;
+        p.x -= p.dashSpeedX * p.diagRatio;
         p.accx -= p.accxAdd;
         p.dashing = "downleft";
-      }else if(!keys[87] && !keys[83] && keys[65] && !keys[68] || !keys[38] && !keys[40] && keys[37] && !keys[39]){ //left
+      } else if (
+        (!keys[87] && !keys[83] && keys[65] && !keys[68]) ||
+        (!keys[38] && !keys[40] && keys[37] && !keys[39])
+      ) {
+        //left
         p.gravity = 0;
         p.x -= p.dashSpeedX;
         p.accx -= p.accxAdd;
         p.dashing = "left";
-      }else if(keys[87] && !keys[83] && keys[65] && !keys[68] || keys[38] && !keys[40] && keys[37] && !keys[39]){ //upleft
-        p.gravity = -p.dashSpeedY*p.diagRatio;
-        p.x -= p.dashSpeedX*p.diagRatio;
+      } else if (
+        (keys[87] && !keys[83] && keys[65] && !keys[68]) ||
+        (keys[38] && !keys[40] && keys[37] && !keys[39])
+      ) {
+        //upleft
+        p.gravity = -p.dashSpeedY * p.diagRatio;
+        p.x -= p.dashSpeedX * p.diagRatio;
         p.accx -= p.accxAdd;
         p.dashing = "upleft";
       }
     }
-    
-    if(p.dashing != false){
+
+    if (p.dashing != false) {
       p.dashTime++;
-      if(p.dashTime > p.dashMax){
+      if (p.dashTime > p.dashMax) {
         p.dashAllowed = false;
         p.dashing = false;
         p.dashTime = 0;
       }
     }
-    if(!p.dashAllowed){
+    if (!p.dashAllowed) {
       p.dashCooldown++;
     }
-    if(p.dashCooldown > p.dashCooldownMax){
+    if (p.dashCooldown > p.dashCooldownMax) {
       p.dashAllowed = true;
       p.dashCooldown = 0;
     }
-    
-    if(p.dashAllowed && p.dashTime > 0 &&!keys[16]){
+
+    if (p.dashAllowed && p.dashTime > 0 && !keys[16]) {
       p.dashTime = 0;
       p.dashing = false;
       p.dashAllowed = false;
@@ -163,16 +202,16 @@ var p = {
       p.accx = 0;
     }
 
-//     print("dashing " + p.dashing);
-//     print("dashTime " + p.dashTime);
-//     print("dashAllowed " + p.dashAllowed);
-//     print("sticking " + p.sticking);
+    //     print("dashing " + p.dashing);
+    //     print("dashTime " + p.dashTime);
+    //     print("dashAllowed " + p.dashAllowed);
+    //     print("sticking " + p.sticking);
   },
   draw: function() {
     noStroke();
-    if(p.dashAllowed){
+    if (p.dashAllowed) {
       fill(255, 255, 255);
-    }else{
+    } else {
       fill(200, 200, 200);
     }
     rect(p.x, p.y, p.w, p.h);
