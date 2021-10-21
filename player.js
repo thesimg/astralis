@@ -163,10 +163,10 @@ var p = {
       p.accx = 0;
     }
 
-    print("dashing " + p.dashing);
-    print("dashTime " + p.dashTime);
-    print("dashAllowed " + p.dashAllowed);
-    print("sticking " + p.sticking);
+//     print("dashing " + p.dashing);
+//     print("dashTime " + p.dashTime);
+//     print("dashAllowed " + p.dashAllowed);
+//     print("sticking " + p.sticking);
   },
   draw: function() {
     noStroke();
@@ -190,4 +190,3 @@ var p = {
     //ellipse(p.x+14, p.y+9, 3, 12);
   }
 };
-ad;
