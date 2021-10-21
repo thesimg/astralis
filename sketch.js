@@ -4,6 +4,8 @@ var blocks = [];
 var scene = "home";
 var deathY = 4500;
 
+var blockSize = 20;
+
 var canvasWidth = 1440;
 var canvasHeight = 720;
 
@@ -38,6 +40,14 @@ function draw() {
       //{
       for (var i = 0; i < blocks.length; i++) {
         blocks[i].pack();
+        if(blocks[i].toDestroy){
+          if(blocks[i].type === "cursed"){
+            blocks.splice(i, 2);
+          } else {
+            blocks.splice(i, 1);
+          }
+          
+        }
       }
       //}
 

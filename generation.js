@@ -1,10 +1,30 @@
 function generateBlocks(genScene) {
   switch (genScene) {
     case "home":
-      for (var i = 0; i < 500; i++) {
+      for (var i = 0; i < 150; i++) {
         var x = random(-2000, 2000);
         var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100)));
+        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "normal"));
+      }
+      for (var i = 0; i < 100; i++) {
+        var x = random(-2000, 2000);
+        var y = random(0, 4000);
+        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "broken"));
+      }
+      for (var i = 0; i < 100; i++) {
+        var x = random(-2000, 2000);
+        var y = random(0, 4000);
+        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "vanishing"));
+      }
+      for (var i = 0; i < 50; i++) {
+        var x = random(-2000, 2000);
+        var y = random(0, 4000);
+        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "cursed"));
+      }
+      for (var i = 0; i < 10; i++) {
+        var x = random(-2000, 2000);
+        var y = random(0, 4000);
+        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "fake"));
       }
       blocks.push(new platform(0, 0, 400, 20));
       blocks.push(new platform(-350, 0, 200, 20));
