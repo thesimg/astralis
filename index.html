@@ -46,6 +46,10 @@
         if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
         }
+        if(e.keyCode === 70)
+       {
+           alert("FULLSCREEN TEST");
+       };
       }, false);
       function setSeedUrl(n) {
         var seedInput = encodeURIComponent(
