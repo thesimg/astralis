@@ -1,6 +1,6 @@
 var p = {
   speed: 4,
-  gravityAdd: 0.4,
+  gravityAdd: 0.4,//0.4
   gravity: 0,
   friction: 1.1,
   accxCap: 3,
@@ -18,7 +18,7 @@ var p = {
   diagRatio: 3 / 5,
 
   jumpable: false,
-  x: 100,
+  x: -10,
   y: -50,
   w: 20,
   h: 20,
@@ -38,6 +38,10 @@ var p = {
 
     if (p.gravity > 20) {
       p.gravity = 20;
+    }
+    
+    if(p.speed != 4){
+      p.speed = 4;
     }
 
     if (!p.dashing) {
@@ -217,7 +221,7 @@ var p = {
     rect(p.x, p.y, p.w, p.h);
     rectMode(CENTER);
     fill(89, 89, 89);
-    if (p.sticking === "top") {
+    if (p.sticking != "top") {
       rect(p.x + 5 + p.accx, p.y + 10 - p.gravity * (3 / 4), 2, 10, 10);
       rect(p.x + 14 + p.accx, p.y + 10 - p.gravity * (3 / 4), 2, 10, 10);
     } else {

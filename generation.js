@@ -1,53 +1,72 @@
 function generateBlocks(genScene) {
   switch (genScene) {
     case "home":
-      for (var i = 0; i < 150; i++) {
-        var x = random(-2000, 2000);
-        var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "normal"));
+      /*for (var i = 0; i < 150; i++) {
+        blocks.push(new platform(round(random(-200, 200))*blockSize, round(random(0, 400))*blockSize, random(50, 100), random(50, 100), "normal"));
       }
       for (var i = 0; i < 100; i++) {
-        var x = random(-2000, 2000);
-        var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "broken"));
+        blocks.push(new platform(round(random(-200, 200))*blockSize, round(random(0, 400))*blockSize, random(50, 100), random(50, 100), "broken"));
       }
       for (var i = 0; i < 100; i++) {
-        var x = random(-2000, 2000);
-        var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "vanishing"));
+        blocks.push(new platform(round(random(-200, 200))*blockSize, round(random(0, 400))*blockSize, random(50, 100), random(50, 100), "vanishing"));
+      }*/
+      for(var i = 0; i < blockData.length; i++){
+        if(blockData[i].mode === "home"){
+          //print(blockData[i]);
+          blocks.push(new platform(blockData[i].x, blockData[i].y, blockData[i].w, blockData[i].h, blockData[i].type, blockData[i].destroyCounter));
+        }
       }
-      for (var i = 0; i < 50; i++) {
-        var x = random(-2000, 2000);
-        var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "cursed"));
-      }
-      for (var i = 0; i < 10; i++) {
-        var x = random(-2000, 2000);
-        var y = random(0, 4000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100), "fake"));
-      }
-      blocks.push(new platform(0, 0, 400, 20));
+      
+      blocks.push(new platform(-50, 0, 100, 20));
       blocks.push(new platform(-350, 0, 200, 20));
-      blocks.push(new portal(-350, -100, 100, 100, "ascent"));
+      blocks.push(new portal(-350, -100, 100, 100, "onetouch"));
+      blocks.push(new platform(150, 0, 200, 20));
+      blocks.push(new portal(250, -100, 100, 100, "traversal"));
       deathY = 4500;
       break;
-    case "ascent":
-      for (var i = 0; i < 700; i++) {
-        var x = random(-1000, 1000);
-        var y = random(-100, -10000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100)));
+    case "traversal":
+      blocks.push(new platform(-50, 0, 100, 20, "normal"));
+      blocks.push(new platform(-350, 0, 200, 20, "normal"));
+      blocks.push(new portal(-350, -100, 100, 100, "home"));
+      
+      /*for(var i = 0; i < blockData.length; i++){
+        if(blockData[i].mode === "traversal"){
+          print(blockData[i]);
+          blocks.push(new platform(blockData[i].x, blockData[i].y, blockData[i].w, blockData[i].h, blockData[i].type, blockData[i].destroyCounter));
+        }
+      }*/
+      for(var k = -10; k < 1; k++){
+        for(var h = 0; h < 50; h++){
+          //chunkData.push({x: h*chunkSize, y: k*chunkSize, w: chunkSize, h: chunkSize, theta: round(random((h+abs(k))/10)), blockW: round(1 + random(8)), blockH: round(1 + random(8)), type: round(random(9)), mode: "traversal"});
+          chunks.push(new chunk(h*chunkSize, k*chunkSize, chunkSize, chunkSize, round(random((h+abs(k))/10)), round(1 + random(8)), round(1 + random(8)), round(random(9)), "traversal"));
+        }
+      }//traversal
+      
+      deathY = 500;
+      break;
+    case "onetouch":
+      /*
+      for (var i = 0; i < 1300; i++) {
+        blocks.push(new platform(round(random(-5, 100))*blockSize, round(random(0, -1000))*blockSize, (1+round(random(7)))*blockSize, (1+round(random(7)))*blockSize, "vanishing"));
       }
+      for (var i = 0; i < 200; i++) {
+        blocks.push(new platform(round(random(-5, 100))*blockSize, round(random(0, -1000))*blockSize, (1+round(random(7)))*blockSize, (1+round(random(7)))*blockSize, "broken"));
+      }
+      */
+      
+      for(var i = 0; i < blockData.length; i++){
+        if(blockData[i].mode === "onetouch"){
+          //print(blockData[i]);
+          blocks.push(new platform(blockData[i].x, blockData[i].y, blockData[i].w, blockData[i].h, blockData[i].type, blockData[i].destroyCounter));
+        }
+      }
+      
       blocks.push(new platform(-50, 0, 100, 20));
       blocks.push(new platform(-350, 0, 200, 20));
       blocks.push(new portal(-350, -100, 100, 100, "home"));
       deathY = 500;
       break;
     case "lose":
-      for (var i = 0; i < 5000; i++) {
-        var x = random(-400, 400);
-        var y = random(-50, -100000);
-        blocks.push(new platform(x, y, random(50, 100), random(50, 100)));
-      }
       blocks.push(new platform(-50, 0, 100, 20));
       blocks.push(new platform(-350, 0, 200, 20));
       blocks.push(new portal(-350, -100, 100, 100, "home"));
