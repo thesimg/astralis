@@ -17,7 +17,7 @@ const canvasHeight = 720;
 
 var godmode = false;
 
-var fullscreen = false;
+var fullscreen = true;
 var fullscreenToggle = true;
 
 var seed;
@@ -32,7 +32,6 @@ function setup() {
   print("url: " + getUrlParameter("seed"));
   print(seed);
 
-  fullscreen = !fullscreen;
   fullscreenToggle = false;
   //print("fullscreen " + fullscreen);
   if (fullscreen) {
@@ -40,6 +39,7 @@ function setup() {
   } else if (!fullscreen) {
     resizeCanvas(canvasWidth, canvasHeight);
   }
+  fullscreen = !fullscreen;
 }
 
 function draw() {
@@ -202,8 +202,7 @@ function draw() {
       rect(0, 0, width, height);
       break;
   }
-  if (keys[70] && fullscreenToggle) {
-    fullscreen = !fullscreen;
+  /*if (keys[70] && fullscreenToggle) {
     fullscreenToggle = false;
     //print("fullscreen " + fullscreen);
     if (fullscreen) {
@@ -211,6 +210,7 @@ function draw() {
     } else if (!fullscreen) {
       resizeCanvas(canvasWidth, canvasHeight);
     }
+    fullscreen = !fullscreen;
   }
   if (!keys[70]) {
     fullscreenToggle = true;
@@ -220,7 +220,7 @@ function draw() {
     if (canvasHeight === windowHeight || canvasWidth === windowWidth) {
       resizeCanvas(canvasWidth, canvasHeight);
     }
-  }
+  }*/
 
   fill(0, 0, 0);
   text(Math.round(p.x), 10, 10);
