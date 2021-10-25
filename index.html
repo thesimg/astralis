@@ -48,7 +48,7 @@
         }
         if(e.keyCode === 70){
           <!--alert("FULLSCREEN");-->
-          document.getElementById("canvasDiv").scrollIntoView(); // {behavior: "smooth", block: "end", inline: "nearest"}
+          document.getElementById("canvasDiv").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"}); // {behavior: "smooth", block: "end", inline: "nearest"}
        };
       }, false);
       function setSeedUrl(n) {
