@@ -46,9 +46,8 @@
         if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
         }
-        if(e.keyCode === 70)
-       {
-           alert("FULLSCREEN TEST");
+        if(e.keyCode === 70){
+           window.location.href(".canvasDiv");
        };
       }, false);
       function setSeedUrl(n) {
