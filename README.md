@@ -1,7 +1,4 @@
-# Sticko
+# Astralis
 
-v0.1.1
-
-
-## Version History
+## A Ludwig Jam Game
 
