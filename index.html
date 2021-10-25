@@ -3,7 +3,7 @@
   <head>
     <title>Astralis</title>
     <meta name="description" content="Astralis" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="libraries/p5.min.js"></script>
   </head>
   <body>
@@ -12,28 +12,35 @@
     </h1>
     <p>
       Welcome to the world of Astralis
-      <br><br><br><br>
+      <br /><br /><br /><br /><br />
       Use WASD or the arrow keys to move around the world
-      <br><br>
+      <br /><br />
       Press SHIFT to dash in the direction you are moving
-      <br><br><br>
+      <br /><br /><br /><br />
       You can stick to any side of a platform
-      <br><br>
+      <br /><br />
       Platforms that have the [!] symbol will vanish after you jump off of them
-      <br><br>
+      <br /><br />
       Platforms that have the [~] symbol are broken and have a limited lifespan
-      <br><br>
+      <br /><br />
       Normal platforms have no symbol
-      <br><br><br>
-      The "Foddian" gamemode has no normal platforms, you must ascend the map as fast as you can, faster dash cooldown
-      <br><br>
-      The "Traversal" gamemode has a mix of all platforms, you must traverse the map as fast as you can
-      <br><br><br>
-      You may enter a specific seed into the "seed" input, so you can compete against your friends on a specific map (SEEDS do not work on Traversal mode at this time)
-      <br><br>
-      
-      
+      <br /><br /><br /><br />
+      The "Foddian" gamemode (left portal) has no normal platforms, you must
+      ascend the map as fast as you can, faster dash cooldown
+      <br /><br />
+      The "Traversal" gamemode (right portal) has a mix of all platforms, you
+      must traverse the map as fast as you can
+      <br /><br /><br /><br />
+      You may enter a specific seed into the "seed" input, so you can compete
+      against your friends on a specific map (SEEDS do not work on Traversal
+      mode at this time)
+      <br /><br />
     </p>
+    <form target="_blank">
+      Input Seed: <input id="seed" type="text" value="" />
+      <button onclick="setSeedUrl()">Go</button>
+    </form>
+    <br /><br />
     <div id="canvasDiv">
       <script src="generation.js"></script>
       <script src="functions.js"></script>
@@ -47,8 +54,9 @@
             e.preventDefault();
         }
         if(e.keyCode === 70){
-          <!--alert("FULLSCREEN");-->
-          document.getElementById("canvasDiv").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"}); // {behavior: "smooth", block: "end", inline: "nearest"}
+          <!--document.getElementById("canvasBottom").scrollIntoView(true); // {behavior: "smooth", block: "end", inline: "nearest"}
+          <!--.scrollTo(0, document.body.scrollHeight);
+          <!--window.scrollTo(0,document.querySelector(".canvasDiv").scrollHeight);
        };
       }, false);
       function setSeedUrl(n) {
@@ -61,14 +69,11 @@
         ];
         window.location.replace(newUrl);
         window.location = newUrl;
-        
+
         return false;
       }
     </script>
 
-    <form target="_blank">
-      Input Seed: <input id="seed" type="text" value="" />
-      <button onclick="setSeedUrl()">Go</button>
-    </form>
+    <p>Made by <a href="https://thesimg.github.io">thesimg</a></p>
   </body>
 </html>
