@@ -1,6 +1,6 @@
 @font-face {
   font-family: "WayfarersToyBox";
-  src: url("https://cdn.glitch.me/b9cf9eea-aad8-416f-b36e-226ae1d66ac9%2FWayfarersToyBoxRegular.woff2?v=1635090807609")
+  src: url(WayfarersToyBoxRegular.woff2)
     format("woff2");
 }
 html {
