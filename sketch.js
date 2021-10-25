@@ -1,25 +1,45 @@
 var camX = 0;
 var camY = 0;
+
+var blockData = [];
+var chunkData = [];
 var blocks = [];
-var scene = "home";
+var chunks = [];
+
+var scene = "loading";
 var deathY = 4500;
 
-var blockSize = 20;
+const blockSize = 20;
+const chunkSize = blockSize * 15;
 
-var canvasWidth = 1440;
-var canvasHeight = 720;
+const canvasWidth = 1440; //1440
+const canvasHeight = 720;
 
 var godmode = false;
 
 var fullscreen = false;
-var fullscreenToggle = false;
+var fullscreenToggle = true;
 
-var worldSeed = 0;
+var seed;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
 
-  generateBlocks(scene);
+  seed = getUrlParameter("seed") || round(random(999999));
+  randomSeed(seed);
+  noiseSeed(seed);
+  print("seed: " + seed);
+  print("url: " + getUrlParameter("seed"));
+  print(seed);
+
+  fullscreen = !fullscreen;
+  fullscreenToggle = false;
+  //print("fullscreen " + fullscreen);
+  if (fullscreen) {
+    resizeCanvas(windowWidth, windowHeight);
+  } else if (!fullscreen) {
+    resizeCanvas(canvasWidth, canvasHeight);
+  }
 }
 
 function draw() {
@@ -28,8 +48,68 @@ function draw() {
     translate(650, 400);
   }
   switch (scene) {
+    case "loading":
+      for (var i = 0; i < 150; i++) {
+        blockData.push({
+          x: round(random(-200, 200)) * blockSize,
+          y: round(random(0, 400)) * blockSize,
+          w: (1 + round(random(7))) * blockSize,
+          h: (1 + round(random(7))) * blockSize,
+          type: "normal",
+          destroyCounter: round(2 + random(3)),
+          mode: "home"
+        });
+      }
+      for (var i = 0; i < 100; i++) {
+        blockData.push({
+          x: round(random(-200, 200)) * blockSize,
+          y: round(random(0, 400)) * blockSize,
+          w: (1 + round(random(7))) * blockSize,
+          h: (1 + round(random(7))) * blockSize,
+          type: "broken",
+          destroyCounter: round(2 + random(3)),
+          mode: "home"
+        });
+        blockData.push({
+          x: round(random(-200, 200)) * blockSize,
+          y: round(random(0, 400)) * blockSize,
+          w: (1 + round(random(7))) * blockSize,
+          h: (1 + round(random(7))) * blockSize,
+          type: "vanishing",
+          destroyCounter: round(2 + random(3)),
+          mode: "home"
+        });
+      } //home
+
+      for (var i = 0; i < 1300; i++) {
+        blockData.push({
+          x: round(random(-5, 100)) * blockSize,
+          y: round(random(0, -1000)) * blockSize,
+          w: (1 + round(random(7))) * blockSize,
+          h: (1 + round(random(7))) * blockSize,
+          type: "vanishing",
+          destroyCounter: round(2 + random(3)),
+          mode: "onetouch"
+        });
+      }
+      for (var i = 0; i < 200; i++) {
+        blockData.push({
+          x: round(random(-5, 100)) * blockSize,
+          y: round(random(0, -1000)) * blockSize,
+          w: (1 + round(random(7))) * blockSize,
+          h: (1 + round(random(7))) * blockSize,
+          type: "broken",
+          destroyCounter: round(2 + random(3)),
+          mode: "onetouch"
+        });
+      }
+
+      scene = "home";
+      print(chunks);
+      generateBlocks("home");
+      break;
     case "home":
-      background(125, 225, 150);
+      background(0);
       rectMode(CORNER);
       p.move();
 
@@ -39,23 +119,20 @@ function draw() {
       translate(camX, camY);
       //{
       for (var i = 0; i < blocks.length; i++) {
-        blocks[i].pack();
-        if(blocks[i].toDestroy){
-          if(blocks[i].type === "cursed"){
-            blocks.splice(i, 2);
-          } else {
-            blocks.splice(i, 1);
-          }
-          
+        if (blocks[i].toDestroy) {
+          blocks.splice(i, 1);
         }
+        blocks[i].pack();
       }
+
       //}
 
       p.draw();
       pop();
       break;
-    case "ascent":
-      background(150 + p.y / 60, 200 + p.y / 50, 250 + p.y / 40);
+    case "onetouch":
+      p.dashCooldownMax = 50;
+      background(0);
       rectMode(CORNER);
       p.move();
 
@@ -63,11 +140,41 @@ function draw() {
       camY = round(lerp(camY, height / 2 - p.y, 0.05));
       push();
       translate(camX, camY);
-      //{
       for (var i = 0; i < blocks.length; i++) {
+        if (blocks[i].toDestroy) {
+          blocks.splice(i, 1);
+        }
         blocks[i].pack();
       }
-      //}
+
+      p.draw();
+      pop();
+      fill(0, -p.y / 100);
+      rect(0, 0, width, height);
+      break;
+    case "traversal":
+      background(0);
+      rectMode(CORNER);
+      p.move();
+
+      camX = round(lerp(camX, width / 2 - p.x, 0.05));
+      camY = round(lerp(camY, height / 2 - p.y, 0.05));
+      push();
+      translate(camX, camY);
+
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i].generated) {
+          chunks.splice(i, 1);
+          print(chunks.length);
+        }
+        chunks[i].pack();
+      }
+      for (var i = 0; i < blocks.length; i++) {
+        if (blocks[i].toDestroy) {
+          blocks.splice(i, 1);
+        }
+        blocks[i].pack();
+      }
 
       p.draw();
       pop();
@@ -95,14 +202,13 @@ function draw() {
       rect(0, 0, width, height);
       break;
   }
-
   if (keys[70] && fullscreenToggle) {
     fullscreen = !fullscreen;
     fullscreenToggle = false;
-    print("fullscreen " + fullscreen);
-    if(fullscreen){
+    //print("fullscreen " + fullscreen);
+    if (fullscreen) {
       resizeCanvas(windowWidth, windowHeight);
-    } else if(!fullscreen) {
+    } else if (!fullscreen) {
       resizeCanvas(canvasWidth, canvasHeight);
     }
   }
@@ -122,7 +228,9 @@ function draw() {
   text(p.y / 600, 10, 60);
   text(scene, 10, 80);
   if (p.y > deathY) {
-    p.y = -1000;
+    blocks = [];
+    generateBlocks(scene);
+    p.y = -50;
     p.x = -10;
   }
 }
@@ -130,7 +238,5 @@ function draw() {
 function windowResized() {
   if (fullscreen) {
     resizeCanvas(windowWidth, windowHeight);
-    print("windowResized in fullscreen");
   }
-  print("windowResized outside fullscreen");
 }
