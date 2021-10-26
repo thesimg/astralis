@@ -44,7 +44,7 @@ platform.prototype.draw = function() {
   noStroke();
   fill(255);
   textAlign(CENTER);
-  textSize(20);
+  textSize(15);
   switch (this.type) {
     case "vanishing":
       text("!", this.x + this.w / 2, this.y + this.h / 2 + 5);
@@ -90,7 +90,7 @@ platform.prototype.pack = function() {
   if (dist(this.x + this.w / 2, this.y + this.h / 2, p.x, p.y) < 500) {
     this.collide();
   }
-  if (Math.abs(p.y - this.y) < 1000 && Math.abs(p.x - this.x) < 1000) {
+  if (Math.abs(p.y - this.y) < windowHeight*(4/3) && Math.abs(p.x - this.x) < windowWidth*(4/3)) {
     this.draw();
   }
   switch (this.type) {
@@ -148,7 +148,7 @@ var chunk = function(x, y, w, h, theta, blockW, blockH, type, mode) {
   this.blockW = blockW;
   this.blockH = blockH;
   this.theta = theta;
-  this.type = type;
+  this.type = type + theta;
   // /round(1 + random(8)), round(1 + random(8)), round(random(9))
 };
 chunk.prototype.draw = function() {
@@ -316,6 +316,18 @@ function switchScene(sceneTo) {
   p.y = -50;
   p.gravity = 0;
   p.speed = 0;
+
+  runTimer = 0;
+  running = false;
+  win = false;
+  clearInterval(timerInterval);
+
+  cleanTimer = 0;
+  cleanRunTime = 0;
+  minutes;
+  seconds;
+  milliseconds;
+
   generateBlocks(sceneTo);
   scene = sceneTo;
   //print(blocks);
@@ -344,4 +356,25 @@ function copyToClipboard(text) {
   document.execCommand("copy");
   document.body.removeChild(dummy);
 }
-copyToClipboard();
+
+function regenWorld() {
+  chunks = [];
+  blocks = [];
+  p.x = -10;
+  p.y = -50;
+  p.gravity = 0;
+  p.speed = 0;
+
+  runTimer = 0;
+  running = false;
+  win = false;
+  clearInterval(timerInterval);
+
+  cleanTimer = 0;
+  cleanRunTime = 0;
+  minutes;
+  seconds;
+  milliseconds;
+
+  generateBlocks(scene);
+}
