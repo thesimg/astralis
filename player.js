@@ -1,6 +1,6 @@
 var p = {
   speed: 4,
-  gravityAdd: 0.4,//0.4
+  gravityAdd: 0.4, //0.4
   gravity: 0,
   friction: 1.1,
   accxCap: 3,
@@ -12,7 +12,7 @@ var p = {
   dashMax: 5,
   dashAllowed: false,
   dashCooldown: 0,
-  dashCooldownMax: 100,
+  dashCooldownMax: 50,
   dashSpeedY: 8,
   dashSpeedX: 12,
   diagRatio: 3 / 5,
@@ -39,8 +39,8 @@ var p = {
     if (p.gravity > 20) {
       p.gravity = 20;
     }
-    
-    if(p.speed != 4){
+
+    if (p.speed != 4) {
       p.speed = 4;
     }
 
@@ -63,7 +63,7 @@ var p = {
       if (p.sticking != "bottom" && p.gravity < -7) {
         p.sticking = false;
       }
-      if(p.sticking === "bottom" && p.gravity > -7){
+      if (p.sticking === "bottom" && p.gravity > -7) {
         p.sticking = false;
       }
     }
@@ -216,7 +216,7 @@ var p = {
     if (p.dashAllowed) {
       fill(255, 255, 255);
     } else {
-      fill(200, 200, 200);
+      fill(150, 150, 150);
     }
     rect(p.x, p.y, p.w, p.h);
     rectMode(CENTER);
