@@ -33,17 +33,17 @@ let seconds;
 let milliseconds;
 let cleanRunTime;
 
-/*let WayfarersToyBox;
+let WayfarersToyBox;
 function preload() {
   WayfarersToyBox = loadFont(
-    "https://github.com/thesimg/astralis/blob/47b4fb336e3c720358dc06cabb2244aaf84884e1/WayfarersToyBoxRegular.ttf" // https://cdn.glitch.me/d29dff3c-e5f7-4437-a9ed-0c8eda33a8ed%2FWayfarersToyBoxRegular.ttf?v=1635217553502 https://github.com/thesimg/astralis/blob/47b4fb336e3c720358dc06cabb2244aaf84884e1/WayfarersToyBoxRegular.ttf
+    "/WayfarersToyBoxRegular.ttf" // https://cdn.glitch.me/d29dff3c-e5f7-4437-a9ed-0c8eda33a8ed%2FWayfarersToyBoxRegular.ttf?v=1635217553502 https://github.com/thesimg/astralis/blob/47b4fb336e3c720358dc06cabb2244aaf84884e1/WayfarersToyBoxRegular.ttf
   );
-}*/
+}
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
 
-  //textFont(WayfarersToyBox);
+  textFont(WayfarersToyBox);
 
   seed = getUrlParameter("seed") || round(random(999999));
   randomSeed(seed);
