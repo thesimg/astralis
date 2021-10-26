@@ -12,7 +12,7 @@ body {
   margin: 0;
   color: white;
   background-color: rgb(20, 20, 20);
-  font-family: "WayfarersToyBox";
+  /*font-family: "WayfarersToyBox";
 
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
